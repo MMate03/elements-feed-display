@@ -1,5 +1,6 @@
 package com.example.elementsfeeddisplay.ui
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -64,7 +65,12 @@ fun FeedScreen(viewModel: FeedViewModel) {
             state = listState,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues),
+                .padding(paddingValues)
+                .border(
+                    width = 2.dp,
+                    color = Color(0xFF2196F3),
+                    shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp)
+                ),
             contentPadding = PaddingValues(8.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
