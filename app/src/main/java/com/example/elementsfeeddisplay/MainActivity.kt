@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.elementsfeeddisplay.domain.repository.FeedRepository
 import com.example.elementsfeeddisplay.ui.FeedScreen
 import com.example.elementsfeeddisplay.ui.theme.ElementsFeedDisplayTheme
+import com.example.elementsfeeddisplay.ui.theme.FeedAppTheme
 import com.example.elementsfeeddisplay.ui.viewmodel.FeedViewModel
 
 class MainActivity : ComponentActivity() {
@@ -34,9 +37,14 @@ class MainActivity : ComponentActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[FeedViewModel::class.java]
 
         setContent {
-
-                FeedScreen(viewModel = viewModel)
-
+            FeedAppTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(), // Ez fontos!
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    FeedScreen(viewModel = viewModel)
+                }
+            }
         }
     }
 }
