@@ -11,37 +11,33 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.elementsfeeddisplay.domain.repository.FeedRepository
+import com.example.elementsfeeddisplay.ui.FeedScreen
 import com.example.elementsfeeddisplay.ui.theme.ElementsFeedDisplayTheme
+import com.example.elementsfeeddisplay.ui.viewmodel.FeedViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ElementsFeedDisplayTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
+        val repository = FeedRepository()
+
+        val viewModelFactory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return FeedViewModel(repository) as T
+
             }
+        }
+
+        val viewModel = ViewModelProvider(this, viewModelFactory)[FeedViewModel::class.java]
+
+        setContent {
+
+                FeedScreen(viewModel = viewModel)
+
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ElementsFeedDisplayTheme {
-        Greeting("Android")
-    }
-}
