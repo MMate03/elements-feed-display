@@ -46,7 +46,7 @@ fun FeedScreen(viewModel: FeedViewModel) {
                         value = textInput,
                         onValueChange = {textInput = it},
                         modifier = Modifier.weight(1f),
-                        placeholder = { Text("Write command(Start/Stop/Pause)")},
+                        placeholder = { Text("Enter command")},
                         singleLine = true
                     )
                     Spacer(modifier = Modifier.width(8.dp))
